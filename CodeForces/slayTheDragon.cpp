@@ -22,7 +22,7 @@ signed main(){
 
     int m; cin>>m;
     while(m--){
-        int ans = 1e18;
+        int ans = 2e18;
         int x, y;
         cin>>x>>y;
 
