@@ -10,7 +10,6 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-   
 
 
 
