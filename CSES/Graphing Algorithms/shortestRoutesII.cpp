@@ -1,5 +1,4 @@
 //https://cses.fi/problemset/task/1672
-//TLE, 14 out of 15 points
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -8,44 +7,59 @@ signed main(){
     
     int n, m, que;
     cin>>n>>m>>que;
-    vector<vector<pair<int, int>>>adj(n+1);
-    vector<vector<int>>dis(n+1, vector<int>(n+1));
+    
+    vector<vector<int>>adj(n+1, vector<int>(n+1));
+
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            if(i!=j)dis[i][j] = 1e18;
+            adj[i][j] = 1e18;
         }
     }
     for(int i=1;i<=m;i++){
         int x, y, w;
         cin>>x>>y>>w;
-        adj[x].push_back({w,y});
-        adj[y].push_back({w,x});
+        adj[x][y] = min(adj[x][y], w);
+        adj[y][x] = min(adj[y][x], w);
     }
+
+    vector<vector<int>>dis(n+1, vector<int>(n+1));
+
     for(int i=1;i<=n;i++){
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>q;
-        vector<int>vis(n+1);
-        q.push({0,i});
-        while(!q.empty()){
-            int y = q.top().second;
-            int w = q.top().first;
-            q.pop();
-            if(vis[y])continue;
-            vis[y] =true;
-            for(auto x : adj[y]){
-                int neww = x.first;
-                int newy = x.second;
-                if(dis[i][y] + neww < dis[i][newy]){
-                    dis[i][newy] = w + neww;
-                    q.push({dis[i][newy], newy});
-                }
-            }
+        for(int j=1;j<=n;j++){
+            dis[i][j] = 1e18;
         }
     }
-    for(int i=1;i<=que;i++){
-        int a, b;
-        cin>>a>>b;
-        if(dis[a][b]==1e18)cout<<-1<<"\n";
-        else cout<<dis[a][b]<<"\n";
+    for(int START=1;START<=n;START++){
+        vector<bool>vis(n+1);
+
+        dis[START][START] = 0;
+
+        int nxt = START;
+        pair<int, int>mn = {1e18, START};
+
+        for(int i=1;i<n;i++){
+            vis[nxt] = true;
+            mn = {1e18, START};
+
+            for(int j=1;j<=n;j++){
+                if(vis[j])continue;
+                if(dis[START][j] > dis[START][nxt] + adj[nxt][j]){
+                    dis[START][j] = dis[START][nxt] + adj[nxt][j];
+                }
+                mn = min(mn, {dis[START][j], j});
+            }
+            nxt = mn.second;
+
+        }
+
+    }
+
+    while(que--){
+        int x, y;
+        cin>>x>>y;
+        if(dis[x][y] == 1e18)cout<<-1<<"\n";
+        else cout<<dis[x][y]<<"\n";
+        assert(dis[x][y] == dis[y][x]);
     }
 
 

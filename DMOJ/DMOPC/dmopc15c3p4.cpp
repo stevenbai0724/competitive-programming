@@ -10,12 +10,8 @@ signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
     int n; cin>>n;
-
     vector<pair<int, int>>cords(n+1);
-    vector<vector<pair<int, int>>>adj(n+1);
-    vector<int>dis(n+1, 1e18);
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>q;
-    
+
     for(int i=1;i<=n;i++){
         int x, y;
         cin>>x>>y;
@@ -23,50 +19,38 @@ signed main(){
     }
     int START; cin>>START;
 
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            if(i==j)continue;
-            int a = abs(cords[i].first - cords[j].first);
-            int b = abs(cords[i].second - cords[j].second);
-
-            adj[i].push_back({(a*a) + (b*b), j});
-        }
-    }
+    vector<int>dis(n+1, (int)1e18); 
+    vector<bool>vis(n+1);
+    dis[0] = 0;
     dis[START] = 0;
-    q.push({0, START});
+    int nxt = START;
+    pair<int, int>mn = {(int)1e18, START};
 
-    while(!q.empty()){
-        int w = q.top().first;
-        int y = q.top().second;
-        q.pop();
-        if(dis[y] < w) continue;
-        for(auto nxt: adj[y]){
-            int neww = nxt.first;
-            int newy = nxt.second;
-            if(neww + dis[y] < dis[newy]){
-                dis[newy] = neww + dis[y];
-                q.push({dis[newy], newy});
+    for(int i=1;i<n;i++){
+        vis[nxt] = true;
+        mn = {(int)1e18, 0};
+        for(int j=1;j<=n;j++){
+            if(vis[j])continue;
+            int a = abs(cords[nxt].first - cords[j].first);
+            int b = abs(cords[nxt].second - cords[j].second);
+            int val = (a*a) + (b*b) + dis[nxt];
+
+            if(dis[j] > val){
+                dis[j] = val;
             }
+            mn = min(mn,{dis[j], j});
+
         }
+        nxt = mn.second;
     }
     sort(dis.begin(), dis.end());
 
-    int t; cin>>t;
-    while(t--){
+    int q; cin>>q;
+    while(q--){
         int x; cin>>x;
 
-        int L = 0;
-        int R = n;
-
-        while(L+1<R){
-            int m = (L+R)/2;
-            if(dis[m]<=x)L = m;
-            else R = m;
-        }
-        cout<<R<<"\n";
-
+        cout<<upper_bound(dis.begin(), dis.end(), x) - dis.begin() -1<<"\n";
     }
-
 
     return 0;
 }

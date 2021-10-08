@@ -1,3 +1,4 @@
+//dijikstra's shortest path algorithm, (n+m)log(n+m) 
 //https://dmoj.ca/problem/sssp
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
