@@ -1,4 +1,4 @@
 # Competitive-Programming
-Solutions to various online judge platforms on CP 
+all of my work on various online judge platforms on competitive programming
 
-Combination of all DMOJ, Codeforces, CSES, etc repositories that I've made in the past
+combination of all DMOJ, Codeforces, CSES, CCC/CCO solutions and data structures/algorithms 
