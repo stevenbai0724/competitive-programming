@@ -1,4 +1,4 @@
-//https://dmoj.ca/problem/dmopc14c5p3
+//https://cses.fi/problemset/task/2183
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
@@ -11,7 +11,6 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    int mx = 1;
     int n; cin>>n;
     vector<int>arr(n+1);
 
@@ -19,15 +18,19 @@ signed main(){
         cin>>arr[i];
     }
 
-    for(int i=1;i<=n;i++){
-        int j = i;
+    sort(arr.begin(), arr.end());
 
-        while(j<n && abs(arr[j+1]-arr[j])<=2){
-            j++;
+    int res =1;
+
+    for(int i=1;i<=n;i++){
+        if(res<arr[i]){
+            cout<<res<<"\n";
+            return 0;
         }
-        mx = max(j-i+1, mx);
+        res += arr[i];
     }
-    cout<<mx<<"\n";
+
+    cout<<res<<"\n";
 
 
 
