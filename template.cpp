@@ -11,7 +11,8 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-
+    int a = 1;
+    cout<<-a<<"\n";
 
 
     return 0;
