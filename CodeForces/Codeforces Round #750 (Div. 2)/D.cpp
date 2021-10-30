@@ -23,31 +23,27 @@ signed main(){
         if(n%2==0){
             for(int i=1;i<=n;i++){
                 if(i&1){
-                    cout<<arr[i]<<" ";
+                    cout<<arr[i+1]<<" ";
                 }
                 else{
-                    if(arr[i]*arr[i-1]>0){
-                        cout<<arr[i-1]*-1<<" ";
-                    }
-                    else{
-                        cout<<arr[i-1]<<" ";
-                    }
+                    
+                    cout<<arr[i-1]*-1<<" ";
+                
                 }
             }
         }
         else {
             for(int i=1;i<=n-3;i++){
+            
                 if(i&1){
-                    cout<<arr[i]<<" ";
+                    cout<<arr[i+1]<<" ";
                 }
                 else{
-                    if(arr[i]*arr[i-1]>0){
-                        cout<<arr[i-1]*-1<<" ";
-                    }
-                    else{
-                        cout<<arr[i-1]<<" ";
-                    }
+                    
+                    cout<<arr[i-1]*-1<<" ";
+                
                 }
+            
             }
             int a = arr[n-2];
             int b = arr[n-1];
