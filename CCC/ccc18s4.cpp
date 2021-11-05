@@ -1,4 +1,4 @@
-//https://dmoj.ca/problem/ccc18s5
+//https://dmoj.ca/problem/ccc18s4
 //subtask 1
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
@@ -12,20 +12,18 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    int n, m, p, q;
-    cin>>n>>m>>p>>q;
+    vector<int>ans(1001);
 
-    for(int i=1;i<=p+q;i++){
-        int a, b, c;
-        cin>>a>>b>>c;
-        if(c!=1){
-            cout<<41<<"\n";
-            return 0;
+    ans[1] = 1;
+
+    for(int i=2;i<=1000;i++){
+        for(int j=2;j<=i;j++){
+            int w = i/j;
+            ans[i] += ans[w];
         }
     }
-
-    cout<<(n*p)+(m*q)-(n*m)+1<<"\n";
-
+    int n; cin>>n;
+    cout<<ans[n]<<"\n";
 
 
     return 0;
