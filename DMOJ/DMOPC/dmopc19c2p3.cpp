@@ -1,4 +1,4 @@
-//https://dmoj.ca/problem/ds1
+//https://dmoj.ca/problem/dmopc19c2p3
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
@@ -37,39 +37,48 @@ struct BIT{
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    BIT b, freq;
+    vector<BIT>bits(21);
+    map<int, int>good;
     int n, q;
     cin>>n>>q;
-    b.init(n);
-    freq.init((int)1e5);
 
+    for(int i=0;i<=20;i++){
+        bits[i].init(n);
+    }
     for(int i=1;i<=n;i++){
-        int x; cin>>x;
-        b.change(i, x);
-        freq.update(x,1);
+        int g; cin>>g;
+        good[i] = g;
+        bits[g].change(i, 1);
+
     }
-    
+ 
     while(q--){
-        char c; cin>>c;
-        if(c=='C'){
-            int x, v;
-            cin>>x>>v;
-            freq.update(b.query(x, x),-1);
-            b.change(x,v);
-            freq.update(v,1);
+  
+        int o; cin>>o;
+        if(o==1){
+            int a, b;
+            cin>>a>>b;
+            bits[good[a]].change(a, 0);
+            good[a] = b;
+            bits[b].change(a, 1);
         }
-        if(c=='Q'){
-            int v; cin>>v;
-            cout<<freq.query(1, v)<<"\n";
-        }
-        if(c=='S'){
-            int l, r;
-            cin>>l>>r;
-            cout<<b.query(l,r)<<"\n";
+        else{
+            int l, r, c;
+            cin>>l>>r>>c;
+            int cnt = c;
+            int ans = 0;
+            for(int i=20;i>=0;i--){
+                cnt -= bits[i].query(l,r);
+                if(cnt<=0){
+                    ans = i;
+                    break;
+                }
+            }
+            cout<<ans<<"\n";
         }
     }
 
-    
+
 
     return 0;
 }

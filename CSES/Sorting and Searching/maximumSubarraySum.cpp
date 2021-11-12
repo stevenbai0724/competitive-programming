@@ -6,18 +6,23 @@ signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
     
     int n; cin>>n;
-    vector<int>array(n);
-    for(int i=0;i<n;i++){
-        cin>>array[i];
+
+    vector<int>arr(n+1);
+    vector<int>psa(n+1);
+
+    for(int i=1;i<=n;i++){
+        cin>>arr[i];
+        psa[i] = psa[i-1];
+        psa[i] += arr[i];
     }
-    int best = -1e18, sum = 0;
-    for (int k = 0; k < n; k++) {
-        
-        //2 cases, we take the current element as the subarray or add it to the subarray
-        sum = max(array[k],sum+array[k]); 
-        best = max(best,sum); //take the best sum
-    }
-    cout << best << "\n";
+    int mx = psa[1];
+    int mn = 0;
+    for(int i=1;i<=n;i++){
+        mx = max(mx, psa[i]-mn);
+        mn = min(mn, psa[i]);
+    }   
+    cout<<mx<<"\n";
+
 
     return 0;
 }

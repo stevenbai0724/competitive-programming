@@ -1,4 +1,4 @@
-//https://dmoj.ca/problem/ds1
+//https://dmoj.ca/problem/dmopc14c2p6
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
@@ -34,40 +34,50 @@ struct BIT{
         return query(y)-query(x-1);
     }
 };
+struct edge{
+    int x, y, id;
+};
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    BIT b, freq;
-    int n, q;
-    cin>>n>>q;
-    b.init(n);
-    freq.init((int)1e5);
+    int n; cin>>n;
+    BIT b;
+    b.init(100000);
+    vector<vector<int>>trees(20001);
 
     for(int i=1;i<=n;i++){
         int x; cin>>x;
-        b.change(i, x);
-        freq.update(x,1);
+        trees[x].push_back(i);
     }
-    
-    while(q--){
-        char c; cin>>c;
-        if(c=='C'){
-            int x, v;
-            cin>>x>>v;
-            freq.update(b.query(x, x),-1);
-            b.change(x,v);
-            freq.update(v,1);
+
+    int q; cin>>q;
+    vector<int>ans(q+1);
+    vector<vector<edge>>querry(2e4+2);
+
+    for(int i=1;i<=q;i++){
+        int l, r, w;
+        cin>>l>>r>>w;
+        querry[w].push_back({l+1,r+1,i});
+    }
+
+    for(int i=20000;i>=1;i--){
+        for(auto x: trees[i]){
+            b.update(x, i);
         }
-        if(c=='Q'){
-            int v; cin>>v;
-            cout<<freq.query(1, v)<<"\n";
-        }
-        if(c=='S'){
-            int l, r;
-            cin>>l>>r;
-            cout<<b.query(l,r)<<"\n";
+        for(auto e: querry[i]){
+            int id = e.id;
+            int l = e.x;
+            int r = e.y;
+
+            ans[id] = b.query(l,r);
+
         }
     }
+    for(int i=1;i<=q;i++){
+        cout<<ans[i]<<"\n";
+    }
+
+
 
     
 
