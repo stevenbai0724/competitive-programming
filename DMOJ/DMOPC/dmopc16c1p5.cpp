@@ -1,4 +1,4 @@
-//https://dmoj.ca/problem/dmopc19c3p3
+//https://dmoj.ca/problem/dmopc16c1p5
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
@@ -37,27 +37,21 @@ struct BIT{
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
+    BIT b;
     int n; cin>>n;
 
-    BIT bit;
-    bit.init(5e5);
-
-    int mod = 2e5;
-    int sum = 0;
     int ans = 0;
 
-    bit.update(0+mod, 1);
+    b.init(n);
+
 
     for(int i=1;i<=n;i++){
         int x; cin>>x;
-        if(x==2)x = -1;
-        sum += x;
-        bit.update(sum+mod, 1);
-        ans += bit.query(1, mod+sum-1);
+        ans += min(b.query(1,x), b.query(x, n));
+        b.update(x, 1);
     }
     cout<<ans<<"\n";
-
-
+    
 
     
 
