@@ -20,7 +20,7 @@ signed main(){
 
     freopen("where.in", "r", stdin);
     freopen("where.out", "w", stdout);
-
+    
     int n; cin>>n;
     
     vector<vector<char>>arr(n+1, vector<char>(n+1));
