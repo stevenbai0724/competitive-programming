@@ -1,4 +1,4 @@
-//http://www.usaco.org/index.php?page=viewproblem2&cpid=595
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=738
 //USACO 2017 Open Contest Silver P1
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>

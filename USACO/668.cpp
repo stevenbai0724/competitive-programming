@@ -1,4 +1,4 @@
-//http://www.usaco.org/index.php?page=viewproblem2&cpid=595
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=668
 //USACO 2016 December Contest Silver P3
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>

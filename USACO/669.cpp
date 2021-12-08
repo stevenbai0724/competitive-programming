@@ -1,4 +1,4 @@
-//http://www.usaco.org/index.php?page=viewproblem2&cpid=644
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=669
 //USACO 2016 December Contest Gold P1
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>

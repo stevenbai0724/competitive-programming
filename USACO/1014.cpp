@@ -1,4 +1,4 @@
-//
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=1014
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>

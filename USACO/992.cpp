@@ -1,5 +1,4 @@
-//http://www.usaco.org/index.php?page=viewproblem2&cpid=595
-//USACO 2020 January Contest Silver P3
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=922
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
