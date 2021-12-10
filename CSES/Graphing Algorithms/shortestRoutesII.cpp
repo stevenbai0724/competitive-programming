@@ -22,44 +22,37 @@ signed main(){
         adj[y][x] = min(adj[y][x], w);
     }
 
-    vector<vector<int>>dis(n+1, vector<int>(n+1));
+    vector<vector<int>>dis(n+1, vector<int>(n+1)); // dis[i][j] is the shortest path from i to j 
 
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             dis[i][j] = 1e18;
+            if(i == j)dis[i][j] = 0;
         }
     }
-    for(int START=1;START<=n;START++){
+
+    for(int START = 1; START <= n; START++){
         vector<bool>vis(n+1);
-
-        dis[START][START] = 0;
-
         int nxt = START;
-        pair<int, int>mn = {1e18, START};
+        vis[START] = true;
 
         for(int i=1;i<n;i++){
+            pair<int, int>mn {1e18, START};
             vis[nxt] = true;
-            mn = {1e18, START};
-
             for(int j=1;j<=n;j++){
                 if(vis[j])continue;
-                if(dis[START][j] > dis[START][nxt] + adj[nxt][j]){
+                if(dis[START][nxt] + adj[nxt][j] < dis[START][j]){
                     dis[START][j] = dis[START][nxt] + adj[nxt][j];
                 }
                 mn = min(mn, {dis[START][j], j});
             }
             nxt = mn.second;
-
         }
-
     }
-
     while(que--){
         int x, y;
         cin>>x>>y;
-        if(dis[x][y] == 1e18)cout<<-1<<"\n";
-        else cout<<dis[x][y]<<"\n";
-        assert(dis[x][y] == dis[y][x]);
+        cout<<(dis[x][y] == 1e18 ? -1 : dis[x][y])<<"\n";
     }
 
 
