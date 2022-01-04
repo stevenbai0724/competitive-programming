@@ -19,7 +19,7 @@ int main(){
 
     }
     queue<int>q;
-    q.push(start);
+    q.push(start);      
     vis[start] = true;
 
     while(!q.empty()){
