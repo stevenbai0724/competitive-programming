@@ -8,20 +8,19 @@ signed main(){
     int n; cin>>n;
 
     vector<int>arr(n+1);
-    vector<int>psa(n+1);
-
     for(int i=1;i<=n;i++){
         cin>>arr[i];
-        psa[i] = psa[i-1];
-        psa[i] += arr[i];
     }
-    int mx = psa[1];
-    int mn = 0;
+
+    int ans = arr[1];
+    int sum = 0;
+
     for(int i=1;i<=n;i++){
-        mx = max(mx, psa[i]-mn);
-        mn = min(mn, psa[i]);
-    }   
-    cout<<mx<<"\n";
+        if(sum < 0)sum = 0;
+        sum += arr[i];
+        ans = max(ans, sum);
+    }
+    cout<<ans<<"\n";
 
 
     return 0;
