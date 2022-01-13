@@ -25,8 +25,17 @@ signed main(){
         sort(sorted.begin(), sorted.end());
 
         for(int i=1;i<=n;i++){
-            
+            if(sorted[i] != arr[i]){
+                int L = i-1;
+                int R = n-L-1;
+                if(L < x && R < x){
+                    cout<<"NO\n";
+                    goto nxt;
+                }
+            }
         }
+        cout<<"YES\n";
+        nxt:;
 
 
 
