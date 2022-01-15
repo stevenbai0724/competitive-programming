@@ -1,4 +1,4 @@
-//
+//https://cses.fi/problemset/task/2189
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
@@ -13,9 +13,6 @@ using namespace __gnu_pbds;
 typedef int C;
 typedef complex<C>P;
 
-
-//#define set tree < long long ,  null_type ,  less<long long> ,  rb_tree_tag ,  tree_order_statistics_node_update >
-//order_of_key
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
