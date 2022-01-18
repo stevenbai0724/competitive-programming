@@ -6,15 +6,16 @@ using namespace __gnu_pbds;
 using namespace std;
 #define int long long
 int mod = 1e9+7;
-int f(int base, int exp){
+int f(int b, int e){
+    int cur = b;
     int ans = 1;
-    int cur = base;
-    for(int i = 0; i<=30; i++){
-        if((1<<i)&exp){
-            ans*=cur;
-            ans%=mod;
+    for(int i=0;i<=30;i++){
+        if((1<<i)&e){
+            ans *= cur;
+            ans %= mod;
         }
-        cur*=cur; cur%=mod;
+        cur *= cur;
+        cur %= mod;
     }
     return ans;
 }
