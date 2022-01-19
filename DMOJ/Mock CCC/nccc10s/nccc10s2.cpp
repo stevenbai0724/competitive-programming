@@ -20,6 +20,7 @@ void dfs(int v, vector<vector<bool>>&adj, vector<int>&dp, vector<int>&colour, in
     }
     colour[v] = 2;
 }
+
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
