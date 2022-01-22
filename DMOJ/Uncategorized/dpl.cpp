@@ -12,19 +12,22 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    vector<int>arr;
-    for(int i=1;i<=45;i++){
-        arr.push_back(i);
+    int n; cin>>n;
+    vector<int>arr(n+3);
+    vector<vector<int>>dp(n+3, vector<int>(n+3));
+
+    for(int i=1;i<=n;i++){
+        cin>>arr[i];
+        dp[i][i] = arr[i];
     }
-    auto cmp = [](int a, int b){
-        return a > b;
-    };
 
-    sort(arr.begin(), arr.end(), [](int a, int b){
-        return a > b;
-    });
-
-    for(int x : arr)cout<<x<<" ";
+    for(int i=n;i>=1;i--){
+        for(int j=i;j<=n;j++){
+            
+            dp[i][j] = max(arr[i] - dp[i+1][j], arr[j] - dp[i][j-1]);
+        }
+    }
+    cout<<dp[1][n]<<"\n";
 
     return 0;
 }
