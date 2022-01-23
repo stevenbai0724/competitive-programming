@@ -4,52 +4,46 @@ public class template{  //class name must be same as the file name, so template.
     public static void main(String [] args){
         Scanner sc = new Scanner (System.in);
 
+        //N
+        //N lines for the student's answer
+        //N lines for the corrcet answers
 
-
-        //input is N. N integers will follow, representing the values in the array of size N
-        //then, the input is Q. Q lines will follow, each with integers a, 
-        //output the sum of all integers between arr[a] and arr[b], 
 
         /*
-            
-            7 3 5 8 2 
-            
-            1 
-            3 
-            1 
-
-            
-            
-            
-
+        3
+        A
+        B
+        A
+        A
+        A
+        B
         */
-        int n = sc.nextInt();
-        int[] arr = new int[N+1]; 
 
-        //arr = {0,0,0,0,0,0,0}
+        int n = sc.nextInt();
+
+        String[] student = new String[n+1];
+        String[] answer = new String[n+1];
+
+        //input for student
 
         for(int i=1;i<=n;i++){
-            arr[i] = sc.nextInt();
+            student[i] = sc.next();
         }
 
-        //arr = {0,7,3,5,8,2,8}
+        //student[] = {"", "A", "B", "A"}
 
-        int q = sc.nextInt();
-
-        for(int i=1;i<=q;i++){
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            int sum = 0;
-
-            for(int j=a;j<=b;j++){
-                sum += arr[j];
-            }
-
-            System.out.println(sum);
-
+        //input for teacher
+        for(int i=1;i<=n;i++){
+            answer[i] = sc.next();
         }
 
-        
+        int ans = 0;
+
+        for(int i=1;i<=n;i++){
+            if(student[i].equals(answer[i])) ans++;
+        }
+
+        System.out.println(ans);
 
 
     }
