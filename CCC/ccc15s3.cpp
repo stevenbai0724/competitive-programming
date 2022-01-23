@@ -7,21 +7,25 @@ signed main(){
 
     int g, p;
     cin>>g>>p;
-    bitset<100002>b;
 
-    b.flip();
+    set<int>s;
+
+    for(int i=-g;i<=-1;i++){
+        s.insert(i);
+    }
+
     for(int i=1;i<=p;i++){
         int x; cin>>x;
-        int pos = b._Find_next(g-x);
-        if(pos>g){
-            cout<<i-1;
+        x *= -1;
+        if(s.lower_bound(x) == s.end()){
+            cout<<i-1<<"\n";
             return 0;
         }
-        b[pos] = 0;
-       
-
+        else{
+            s.erase(s.lower_bound(x));
+        }
     }
-    cout<<p;
+    cout<<p<<"\n";
     
     return 0;
 }

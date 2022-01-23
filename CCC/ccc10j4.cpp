@@ -8,39 +8,38 @@ int main(){
         if(n==0)break;
 
         vector<int>arr(n+1);
-        vector<int>diff(n);
+        vector<int>diff(n+1);
 
-        for(int i =1;i<=n;i++){
+        for(int i=1;i<=n;i++){
             cin>>arr[i];
         }
-        if(n==1){
+        for(int i=1;i<n;i++){
+            diff[i] = arr[i+1] - arr[i];
+        }
+        if(n == 1){
             cout<<0<<"\n";
             continue;
         }
-        for(int i =1;i<n;i++){
-            diff[i] = arr[i+1]-arr[i];
+        if(n == 2){
+            cout<<1<<"\n";
+            continue;
         }
-        int start = diff[1];
-        int pattern = 1;
-        int count = 1;
-        while(true){
+        int ans = n-1;
 
-            int index = 1+(count*pattern);
+        for(int t=1;t<n-1;t++){
+            bool good = true;
 
-            if(index>n-1){
-                cout<<pattern<<"\n";
+            for(int i=1;i<n;i++){
+                if(i - t >=1){
+                    if(diff[i] != diff[i-t])good = false;
+                }
+            }
+            if(good){
+                ans = t;
                 break;
             }
-
-            if(diff[index]==start){
-                count++;
-                continue;
-            }
-            if(diff[index]!=start){
-                count = 1;
-                pattern++;
-            }
         }
+        cout<<ans<<"\n";
 
     }
 
