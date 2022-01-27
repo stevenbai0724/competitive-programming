@@ -11,7 +11,6 @@ using namespace __gnu_pbds;
 //order_of_key
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
-    
 
     return 0;
 }

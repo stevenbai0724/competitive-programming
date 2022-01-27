@@ -1,4 +1,4 @@
-//
+//https://dmoj.ca/problem/cco02p5
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
