@@ -27,7 +27,7 @@ signed main(){
         cin>>x>>y>>w;
 
         adj[x][y] = min(adj[x][y], w);
-        adj[y][x] = min(adj[y][x], w);
+
     }
 
     vector<bool>vis(n+5);
