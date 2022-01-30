@@ -39,8 +39,8 @@ signed main(){
         for(auto nxt: adj[y]){
             int neww = nxt.first;
             int newy = nxt.second;
-            if(dis[y] + neww < dis[newy]){
-                dis[newy] = dis[y] + neww;
+            if(w + neww < dis[newy]){
+                dis[newy] = w + neww;
                 q.push({dis[newy], newy});
             }
         }
