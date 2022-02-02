@@ -1,4 +1,4 @@
-//https://dmoj.ca/problem/coci21c4p1
+//
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <cmath>
@@ -13,25 +13,31 @@ signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
     int n; cin>>n;
-    int mn = 1e18;
-    int ind = 1;
     vector<int>arr(n+1);
 
     for(int i=1;i<=n;i++){
         cin>>arr[i];
-        if(arr[i] < mn){
-            mn = arr[i];
-            ind = i;
-        }
     }
+
+    stack<pair<int, int>>s; //val, ind
     int ans = 0;
     for(int i=1;i<=n;i++){
-        if(i == ind)continue;
-        ans += mn + arr[i];
+        int cnt = 0;
+        while(!s.empty()){
+            if(s.top().first < arr[i]){
+                cnt += abs(s.top().second - i) +1;
+                s.pop();
+            }
+            else break;
+        }
+        if(!s.empty()){
+            cnt += abs(s.top().second - i) +1;
+        }
+        ans += cnt;
 
+        s.push({arr[i], i});
     }
     cout<<ans<<"\n";
-
 
     return 0;
 }
