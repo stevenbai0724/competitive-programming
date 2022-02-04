@@ -115,7 +115,5 @@ signed main(){
     }
     cout<<(mn == 1e18 ? -1 : mn-1)<<"\n";
 
-
-
     return 0;
 }
