@@ -1,52 +1,93 @@
 //https://dmoj.ca/problem/dmopc14ce1p4
 #include <bits/stdc++.h>
 using namespace std;
-#define int double
-signed main(){
+struct edge{
+    int x;
+    int used;
+    double time;
+};
+struct TIME{
+    int used;
+    double time;
+};
+class Compare{
+    public:
+        bool operator() (edge a, edge b){
+            if(a.time == b.time){
+                return a.used > b.used;
+            }
+            return a.time > b.time; 
+        }
+};
+int main(){
     cin.tie(nullptr)->sync_with_stdio(false);
-    
-    int n, m;
-    cin>>n>>m;
-    int c = 4.0/3.0;
-
-    vector<vector<pair<int,int>>>adj(n+1);
-    priority_queue<pair<int,int>, vector<pair<int, int>>, greater<pair<int,int>>>q;
-    vector<int>dis(n+1, 1e9);
-    vector<int>vis(n+1, false);
-    vector<int>p(n+1);
-    vector<int>ans;
-    for(int i=1;i<=m;i++){
-        int x, y, d, s;
-        cin>>x>>y>>d>>s;
-        adj[x].push_back({d/s*60,y});
-        adj[y].push_back({d/s*60,x});
+    int n; cin>>n;
+    int m; cin>>m;
+    vector<vector<pair<double, int>>>adj(n+1);
+    vector<TIME>ans(n+1);
+    vector<TIME>ans2(n+1);
+    for(auto &nxt: ans){
+        nxt.used = 1e9;
+        nxt.time = 1e9;
     }
-    dis[1] = 0;
-    q.push({0,1});
+    for(auto &nxt: ans2){
+        nxt.used = 1e9;
+        nxt.time = 1e9;
+    }
+    ans[1].used = ans[1].time = 0;
+    ans2[1].used = ans2[1].time = 0;
 
+    for(int i=1;i<=m;i++){
+        int x, y;
+        cin>>x>>y;
+        double d, s;
+        cin>>d>>s;
+        adj[x].push_back({d/s, y});
+        adj[y].push_back({d/s, x});
+    }
+    double fact = 60.0000000000000000;
+    priority_queue<edge, vector<edge>, Compare>q;
+    q.push({1,0,0});
     while(!q.empty()){
-        int y = q.top().second;
-        int w = q.top().first;
-        q.pop();
-        if(vis[y])continue;
-        vis[y] =true;
-        for(auto x: adj[y]){
-            int newy = x.second;
-            int neww = x.first;
-            if(neww+dis[y]<dis[newy]){
-                dis[newy] = neww+dis[y];
-                q.push({dis[newy], newy});
-                p[newy] = y;
+        int cur = q.top().x;
+        int used = q.top().used; 
+        double t = q.top().time;
+        q.pop();    
+        for(auto PPP: adj[cur]){
+            double newt = PPP.first * fact; 
+            int nxt = PPP.second; 
+            if(ans[nxt].time > t + newt){ 
+                ans[nxt].time = t + newt;
+                ans[nxt].used = used + 1;
+                q.push({nxt, ans[nxt].used, ans[nxt].time});
+            }
+            else if(ans[nxt].time == t + newt && used + 1 < ans[nxt].used){
+                ans[nxt].used = used + 1;
+                q.push({nxt, ans[nxt].used, ans[nxt].time});
             }
         }
     }
-    int cur = n;
-    ans.push_back(n);
-    while(cur!=1){
-        cur = p[cur];
-        ans.push_back(cur);
+    fact = 80.00000000000000;
+    q.push({1,0,0});
+    while(!q.empty()){
+        int cur = q.top().x; 
+        int used = q.top().used; 
+        double t = q.top().time;
+        q.pop();    
+        for(auto PPP: adj[cur]){
+            double newt = PPP.first * fact; 
+            int nxt = PPP.second; 
+            if(ans2[nxt].time > t + newt){ 
+                ans2[nxt].time = t + newt;
+                ans2[nxt].used = used + 1;
+                q.push({nxt, ans2[nxt].used, ans2[nxt].time});
+            }
+            else if(ans2[nxt].time == t + newt && used + 1 < ans2[nxt].used){
+                ans2[nxt].used = used + 1;
+                q.push({nxt, ans2[nxt].used, ans2[nxt].time});
+            }
+        }
     }
-    ans.pop_back();
-    cout<<ans.size()<<"\n"<<round(dis[n]*c-dis[n]);
+    cout<<ans[n].used<<"\n"<<round(ans2[n].time - ans[n].time)<<"\n";
     return 0;
 }
