@@ -29,7 +29,7 @@ int lca(int x, int y){
     }
     int diff = lvl[x] - lvl[y];
 
-    for(int i=0;i<=ln;i++){
+    for(int i=ln;i>=0;i--){
         if(diff&(1<<i)){
             x = dp[i][x];
         }

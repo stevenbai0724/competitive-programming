@@ -10,6 +10,7 @@ using namespace __gnu_pbds;
 //#define set tree < long long ,  null_type ,  less<long long> ,  rb_tree_tag ,  tree_order_statistics_node_update >
 //order_of_key
 mt19937_64 rng(std::chrono::system_clock::now().time_since_epoch().count());
+
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
