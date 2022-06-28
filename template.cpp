@@ -12,17 +12,5 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    int t; cin>>t;
-    int mx = 0;
-    string ans;
-    while(t--){
-        string s; cin>>s;
-        if(s.length() >= mx){
-            ans = s;
-            mx = s.length();
-        }
-    }
-    cout<<ans<<"\n";
-
     return 0;
 }
