@@ -19,7 +19,7 @@ public class Main {
         if (day>=250){
             b += (day-250)*0.25;
         }
-        
+    
         a+= (evening*.15) + (weekend*.20);
         b+= (evening*.35) + (weekend*.25);
         
