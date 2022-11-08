@@ -12,5 +12,10 @@ using namespace __gnu_pbds;
 signed main(){
     cin.tie(nullptr)->sync_with_stdio(false);
 
+    int x = 4;
+    int y = 6;
+
+    cout<<(-x - y);
+
     return 0;
 }
